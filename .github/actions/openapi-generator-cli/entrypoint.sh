@@ -9,6 +9,8 @@ if [ "$GIT_BRANCH" = "" ] ; then
   GIT_BRANCH="$(git branch -a --contains HEAD | sed -n 2p | awk '{ printf $1 }')";
   export GIT_BRANCH=${GIT_BRANCH#remotes/origin/};
 fi
+git remote set-url origin https://taroshun32:${GITHUB_TOKEN}@github.com/taroshun32/openapi-generator.git
+git checkout $GIT_BRANCH
 
 ./mvnw clean package -DskipTests=true
 

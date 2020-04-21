@@ -200,6 +200,9 @@ public abstract class AbstractKotlinCodegen extends DefaultCodegen implements Co
         cliOptions.add(new CliOption(CodegenConstants.SORT_MODEL_PROPERTIES_BY_REQUIRED_FLAG, CodegenConstants.SORT_MODEL_PROPERTIES_BY_REQUIRED_FLAG_DESC));
 
         cliOptions.add(CliOption.newBoolean(MODEL_MUTABLE, MODEL_MUTABLE_DESC, false));
+
+        // gitignore使いたいので追加
+        supportingFiles.add(new SupportingFile("gitignore.mustache", "", ".gitignore"));
     }
 
     @Override

@@ -46,6 +46,7 @@ import kotlinx.coroutines.flow.Flow;
 import kotlin.collections.List
 import kotlin.collections.Map
 
+/** 実装クラスに持っていく
 @RestController
 {{#useBeanValidation}}
 @Validated
@@ -57,9 +58,11 @@ import kotlin.collections.Map
 @RequestMapping("\${api.base-path:<%contextPath%>}")
 <%={{ }}=%>
 {{#operations}}
-class {{classname}}Controller({{#serviceInterface}}@Autowired(required = true) val service: {{classname}}Service{{/serviceInterface}}) {
+*/
+abstract class {{classname}}BaseController({{#serviceInterface}}val service: {{classname}}Service{{/serviceInterface}}) {
 {{#operation}}
 
+    /** 実装クラスに持っていく
     {{#swaggerAnnotations}}
     @ApiOperation(
         value = "{{{summary}}}",
@@ -77,9 +80,9 @@ class {{classname}}Controller({{#serviceInterface}}@Autowired(required = true) v
         produces = [{{#produces}}"{{{mediaType}}}"{{#hasMore}}, {{/hasMore}}{{/produces}}], {{/hasProduces}}{{#hasConsumes}}
         consumes = [{{#consumes}}"{{{mediaType}}}"{{#hasMore}}, {{/hasMore}}{{/consumes}}],{{/hasConsumes}}{{/singleContentTypes}}
         method = [RequestMethod.{{httpMethod}}])
-    {{#reactive}}{{^isListContainer}}suspend {{/isListContainer}}{{/reactive}}fun {{operationId}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},{{/hasMore}}{{/allParams}}): ResponseEntity<{{>returnTypes}}> {
-        return {{>returnValue}}
-    }
+    @ResponseStatus(HttpStatus.OK)
+    */
+    abstract {{#reactive}}{{^isListContainer}}suspend {{/isListContainer}}{{/reactive}}fun {{operationId}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},{{/hasMore}}{{/allParams}}): {{>returnTypes}}
 {{/operation}}
 }
 {{/operations}}

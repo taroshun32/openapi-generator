@@ -1,0 +1,14 @@
+package {{basePackage}}
+
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonCreator
+import javax.validation.constraints.NotNull
+
+/**
+* APIバージョン
+* @param version
+*/
+data class Version @JsonCreator constructor (
+    @get:NotNull
+    @JsonProperty("version") val version: kotlin.String = "{{artifactVersion}}"
+)

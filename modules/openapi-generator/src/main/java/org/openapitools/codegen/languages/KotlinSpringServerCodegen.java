@@ -604,7 +604,7 @@ public class KotlinSpringServerCodegen extends AbstractKotlinCodegen
      */
     private void doDataTypeAssignment(final String returnType, DataTypeAssigner dataTypeAssigner) {
         if (returnType == null) {
-            dataTypeAssigner.setReturnType("Unit");
+            dataTypeAssigner.setReturnType("HttpStatus"); // UnitからHttpStatusに変更
         } else if (returnType.startsWith("kotlin.collections.List")) {
             int end = returnType.lastIndexOf(">");
             if (end > 0) {
